@@ -1,4 +1,5 @@
 //Adding Middleware
+//Adding Middleware
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
@@ -41,3 +42,23 @@ exports.jwtPassport = passport.use(
 );
 
 exports.verifyUser = passport.authenticate('jwt', { session: false });
+
+/*
+exports.verifyAdmin((req, res, next) => {
+    if (req.user.admin) {
+        return next();
+    } else {
+        const err = new Err("You are not authorized to perform this operation");
+        err.status = 403;
+        return next(err);
+    }
+});*/ 
+exports.verifyAdmin = function(req, res, next) {
+    if (req.user.admin) {
+        return next();
+    } else {
+        const err = new Err("You are not authorized to perform this operation");
+        err.status = 403;
+        return next(err);
+    }
+} 
