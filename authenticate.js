@@ -52,12 +52,12 @@ exports.verifyAdmin((req, res, next) => {
         err.status = 403;
         return next(err);
     }
-});*/ 
-exports.verifyAdmin = function(req, res, next) {
+});*/
+exports.verifyAdmin = function (req, res, next) {
     if (req.user.admin) {
         return next();
     } else {
-        const err = new Err("You are not authorized to perform this operation");
+        const err = new Err(`You are not authorized to perform this operation`);
         err.status = 403;
         return next(err);
     }
